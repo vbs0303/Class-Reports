@@ -1,0 +1,70 @@
+---
+title: "R Markdown tutorial"
+author: "Vaibhav Shelar"
+date: "2025-02-25"
+output:
+  html_document:
+  word_document:
+  toc: true
+  toc_float: true
+  md_document:
+    variant: gfm
+  pdf_document:
+---
+
+#This is an example of a R code.
+```{r R code Example, include=TRUE, echo=FALSE}
+
+data(mtcars)
+summary(mtcars)
+```
+
+# This is how to include figures
+```{r Include figures}
+library(knitr)
+library(ggplot2)
+library(rmarkdown)
+
+data("mtcars")
+ggplot(mtcars, aes(x = wt, y = mpg)) +
+  geom_smooth(method = lm, se = FALSE) +
+  geom_point(aes(color = wt)) +
+  xlab("Weight") +
+  ylab("Miles per gallon") +
+  scale_color_gradient(low = "forestgreen", high = "black")
+```
+
+## R markdown fromatting options 
+
+# First level header
+
+*this text is italics*
+**this text is italics** # double asterics for bold
+
+1. one item
+2. another item
+  - one subitem
+
+## Links
+
+[Link to my github](https://github.com/vbs0303/Class-Reports.git)
+
+## Images
+![Shrek ggplot](shrek.jpg)
+
+
+## Formatted Tables
+```{r}
+library(knitr)
+kable(mtcars, digits = 3, format = "markdown")
+```
+
+
+
+
+
+
+
+
+
+
