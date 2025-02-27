@@ -3,9 +3,9 @@ title: "R Markdown Coding Challenge"
 author: "Vaibhav Shelar"
 date: "2025-02-27"
 output:
-  word_document: default
   md_document:
     variant: gfm
+  word_document: default
   pdf_document: default
   html_document: 
     toc: true
