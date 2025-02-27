@@ -3,24 +3,28 @@ title: "R Markdown Coding Challenge"
 author: "Vaibhav Shelar"
 date: "2025-02-27"
 output:
-  md_document:
-    variant: gfm
-  pdf_document: default
+  word_document: default
   html_document: 
     toc: true
     toc_float: true
-  word_document: default
+  md_document:
+    variant: gfm
+  pdf_document: default
 ---
+
+```{r}
+library(knitr)
+```
 
 - [Link of manuscript](https://doi.org/10.1094/PDIS-06-21-1253-RE)
 
-- [GitHub flavored .md file](R-Markdown-Coding-Challenge)
+- [GitHub flavored .md file](Coding Challenge 4/R-Markdown-Coding-Challenge.md)
 
 ## File Tree
 
 ```{r}
 library("fs")
-fs::dir_tree(path = "D:/Spring 2025/PLPA7820/Class-Reports/Assignments/Coding Challnge 4")
+fs::dir_tree(path = "D:/Spring 2025/PLPA7820/Class-Reports/Assignments/Coding Challenge 4")
 ```
 
 

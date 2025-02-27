@@ -1,7 +1,6 @@
 - [Link of manuscript](https://doi.org/10.1094/PDIS-06-21-1253-RE)
 
-- [GitHub flavored .md
-  file](path%20= "D:\Spring 2025\PLPA7820\Class-Reports\Assignments\R-Markdown-Coding-Challenge.md")
+- [GitHub flavored .md file](R-Markdown-Coding-Challenge)
 
 ## File Tree
 
