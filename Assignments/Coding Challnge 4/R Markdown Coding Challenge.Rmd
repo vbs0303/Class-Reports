@@ -3,9 +3,9 @@ title: "R Markdown Coding Challenge"
 author: "Vaibhav Shelar"
 date: "2025-02-27"
 output:
-  word_document: default
   md_document:
     variant: gfm
+  word_document: default
   pdf_document: default
   html_document: 
     toc: true
@@ -13,6 +13,16 @@ output:
 ---
 
 - [Link of manuscript](https://doi.org/10.1094/PDIS-06-21-1253-RE)
+
+
+
+## File Tree
+
+```{r}
+library("fs")
+fs::dir_tree(path = "D:/Spring 2025/PLPA7820/Class-Reports/Assignments/Coding Challnge 4")
+```
+
 
 ## Q1
 # YAML Header: 
