@@ -1,5 +1,7 @@
 - [Link of manuscript](https://doi.org/10.1094/PDIS-06-21-1253-RE)
 
+- [GitHub flavored .md file](R-Markdown-Coding-Challenge)
+
 ## File Tree
 
 ``` r
@@ -11,7 +13,14 @@ fs::dir_tree(path = "D:/Spring 2025/PLPA7820/Class-Reports/Assignments/Coding Ch
     ## ├── R Markdown Coding Challenge.Rmd
     ## ├── R-Markdown-Coding-Challenge.docx
     ## ├── R-Markdown-Coding-Challenge.html
-    ## └── R-Markdown-Coding-Challenge.pdf
+    ## ├── R-Markdown-Coding-Challenge.md
+    ## ├── R-Markdown-Coding-Challenge.pdf
+    ## └── R-Markdown-Coding-Challenge_files
+    ##     └── figure-gfm
+    ##         ├── unnamed-chunk-6-1.png
+    ##         ├── unnamed-chunk-7-1.png
+    ##         ├── unnamed-chunk-8-1.png
+    ##         └── unnamed-chunk-9-1.png
 
 ## Q1
 

@@ -5,16 +5,16 @@ date: "2025-02-27"
 output:
   md_document:
     variant: gfm
-  word_document: default
   pdf_document: default
   html_document: 
     toc: true
     toc_float: true
+  word_document: default
 ---
 
 - [Link of manuscript](https://doi.org/10.1094/PDIS-06-21-1253-RE)
 
-
+- [GitHub flavored .md file](R-Markdown-Coding-Challenge)
 
 ## File Tree
 
