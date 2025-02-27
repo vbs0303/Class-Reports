@@ -1,0 +1,145 @@
+---
+title: "ggplot_assignment"
+author: "Zachary Noel"
+date: "2023-03-21"
+output: html_document
+---
+
+```{r}
+library(ggplot2)
+```
+
+
+```{r}
+toxin.data <- read.csv("MycotoxinData.csv", na.strings = "na")
+```
+
+
+
+#### Q2
+Make a boxplot using ggplot with DON as the y variable, treatment as the x variable, and color mapped to the wheat cultivar. Show the code you use to load the libraries you need read in the data and make the plot. Change the y label to “DON (ppm)” and make the x label blank.
+```{r}
+ggplot(toxin.data, aes(x = Treatment, y = DON, color = Cultivar)) +
+  geom_boxplot() + # add boxplot layer
+  xlab("") + # change the xlabel to blank
+  ylab("DON (ppm)") # change the y label
+```
+
+#### Q3
+Now convert this same data into a bar chart with standard-error error bars. 
+```{r}
+ggplot(toxin.data, aes(x = Treatment, y = DON, color = Cultivar)) +
+  stat_summary(fun=mean,geom="bar", position = "dodge", width = 0.9) +
+  stat_summary(fun.data = mean_se, geom = "errorbar", position = "dodge", width = 0.9) +
+  xlab("") + # change the xlabel to blank
+  ylab("DON (ppm)") # change the y label
+
+```
+
+
+#### Q4
+Add points to the foreground of the boxplot and bar chart you made in questions 2 and 3 that show the distribution of points over the boxplots or bars. Set the shape = 21 and outline color black (hint: use jitter_dodge). 
+
+Boxplot
+```{r}
+ggplot(toxin.data, aes(x = Treatment, y = DON, fill = Cultivar)) +
+  stat_summary(fun=mean,geom="bar", position = "dodge", width = 0.9) +
+  stat_summary(fun.data = mean_se, geom = "errorbar", position = "dodge", width = 0.9) +
+  xlab("") + # change the xlabel to blank
+  ylab("DON (ppm)") + # change the y label
+  geom_point(pch = 21, color = "black", position = position_jitterdodge()) 
+```
+
+Barchart
+```{r}
+ggplot(toxin.data, aes(x = Treatment, y = DON, fill = Cultivar)) +
+  geom_boxplot() + # add boxplot layer
+  xlab("") + # change the xlabel to blank
+  ylab("DON (ppm)") + # change the y label
+  geom_point(pch = 21, color = "black", position = position_jitterdodge()) 
+```
+
+#### Q5
+Change the color and fill of the points and boxplots to match some of the colors in the following colorblind pallet. 
+```{r}
+cbbPalette <- c("#000000", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+
+ggplot(toxin.data, aes(x = Treatment, y = DON, fill = Cultivar)) +
+  geom_boxplot() + # add boxplot layer
+  xlab("") + # change the xlabel to blank
+  ylab("DON (ppm)") + # change the y label
+  geom_point(pch = 21, color = "black", position = position_jitterdodge()) +
+  scale_fill_manual(values = cbbPalette)
+```
+
+### Q6
+Add a facet to the plots based on cultivar.
+```{r}
+ggplot(toxin.data, aes(x = Treatment, y = DON, fill = Cultivar)) +
+  geom_boxplot() + # add boxplot layer
+  xlab("") + # change the xlabel to blank
+  ylab("DON (ppm)") + # change the y label
+  geom_point(pch = 21, color = "black", position = position_jitterdodge()) +
+  scale_fill_manual(values = cbbPalette) +
+  facet_wrap(~Cultivar)
+```
+
+
+### Q7
+Explore the themes and change to a theme of interest. 
+```{r}
+ggplot(toxin.data, aes(x = Treatment, y = DON, fill = Cultivar)) +
+  geom_boxplot() + # add boxplot layer
+  xlab("") + # change the xlabel to blank
+  ylab("DON (ppm)") + # change the y label
+  geom_point(pch = 21, color = "black", position = position_jitterdodge()) +
+  scale_fill_manual(values = cbbPalette) +
+  facet_wrap(~Cultivar) + 
+  theme_classic()
+```
+
+### Q8
+Add transparency to the points so you can still see the boxplot or bar in the background. 
+```{r}
+ggplot(toxin.data, aes(x = Treatment, y = DON, fill = Cultivar)) +
+  geom_boxplot() + # add boxplot layer
+  xlab("") + # change the xlabel to blank
+  ylab("DON (ppm)") + # change the y label
+  geom_point(alpha = 0.5, pch = 21, color = "black", position = position_jitterdodge()) +
+  scale_fill_manual(values = cbbPalette) +
+  facet_wrap(~Cultivar) + 
+  theme_classic()
+```
+
+### Q9
+Explain what the boxplot and barcharts are showing. How are they similar? How are they different? Which representation of the data are better and why? 
+The boxplot and barchart are essentially showing the distribution of points around the mean for each treatment. The boxplot is a better representation of these data since it is better at showing the true variation in data rather than the bar charts where the error bar doesn't fully capture the varitation and might be slightly missleading. 
+
+
+Q10 
+Explore two other ways to represent the same data https://ggplot2.tidyverse.org/reference/ . Plot them and show the code here. Which one would you choose to represent your data and why? 
+
+Violin plot - shows distributions of points this is similar to a boxplot. This is a nice visualization of a distribution because it shows all points and the distribution of points that make up the mean. 
+```{r}
+ggplot(toxin.data, aes(x = Treatment, y = DON, fill = Cultivar)) +
+  geom_violin(scale = "width") + # add boxplot layer
+  xlab("") + # change the xlabel to blank
+  ylab("DON (ppm)") + # change the y label
+  geom_point(alpha = 0.5, pch = 21, color = "black", position = position_jitterdodge()) +
+  scale_fill_manual(values = cbbPalette) +
+  facet_wrap(~Cultivar) + 
+  theme_classic()
+```
+
+you could use a dotplot for example. This shows the distribution in points for each treatment and where they occur. This is an exact representation of the distribution of points that make up a mean. Its a great representation of the data, however, sometimes it can get messy as in this example since the NTC treatment has all points in 0 and it overlaps with other treatments making it hard to see all the datapoints. 
+```{r}
+ggplot(toxin.data, aes(x = Treatment, y = DON, fill = Cultivar)) +
+  geom_dotplot(binaxis = "y", stackdir = "center", position = "dodge", alpha = 0.5, binwidth = 4) + # add boxplot layer
+  xlab("") + # change the xlabel to blank
+  ylab("DON (ppm)") + # change the y label
+  
+  scale_fill_manual(values = cbbPalette) +
+  facet_wrap(~Cultivar) + 
+  theme_classic()
+```
+

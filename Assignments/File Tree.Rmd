@@ -1,0 +1,67 @@
+---
+title: "File tree"
+author: "Vaibhav Shelar"
+date: "2025-02-27"
+output: 
+html_document:
+  word_document:
+  toc: true
+  toc_float: true
+  md_document:
+    variant: gfm
+  pdf_document:
+
+---
+## File Tree
+
+── Assignment 1.R
+├── Coding Challenge 3_Vaibhav B Shelar.R
+├── Coding Challenge_Data Visualization 2_Vaibhav.R
+├── CSV file Loading_Vaibhav.R
+├── Data Visualization -2_Vaibhav Shelar.R
+├── ggplotassignment.Rmd
+├── Homework 1.R
+├── Homework Coding Notes Data Visualization 1_Vaibhav.R
+├── New folder
+│   ├── CodingChallenge2_Vaibhav.docx
+│   ├── CodingChallenge2_Vaibhav.pdf
+│   └── MycotoxinData.csv
+├── R coding Challenge-1_Vaibhav.R
+├── R Markdown Test.Rmd
+├── R-Markdown-Test.docx
+├── R-Markdown-Test.html
+├── R-Markdown-Test.md
+├── R-Markdown-Test.pdf
+├── R-Markdown-Test_files
+│   └── figure-gfm
+│       └── pressure-1.png
+└── shrek.jpg
+
+
+```
+── Assignment 1.R
+├── Coding Challenge 3_Vaibhav B Shelar.R
+├── Coding Challenge_Data Visualization 2_Vaibhav.R
+├── CSV file Loading_Vaibhav.R
+├── Data Visualization -2_Vaibhav Shelar.R
+├── ggplotassignment.Rmd
+├── Homework 1.R
+├── Homework Coding Notes Data Visualization 1_Vaibhav.R
+├── New folder
+│   ├── CodingChallenge2_Vaibhav.docx
+│   ├── CodingChallenge2_Vaibhav.pdf
+│   └── MycotoxinData.csv
+├── R coding Challenge-1_Vaibhav.R
+├── R Markdown Test.Rmd
+├── R-Markdown-Test.docx
+├── R-Markdown-Test.html
+├── R-Markdown-Test.md
+├── R-Markdown-Test.pdf
+├── R-Markdown-Test_files
+│   └── figure-gfm
+│       └── pressure-1.png
+└── shrek.jpg
+
+```
+
+
