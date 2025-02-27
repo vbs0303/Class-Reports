@@ -3,12 +3,12 @@ title: "R Markdown Coding Challenge"
 author: "Vaibhav Shelar"
 date: "2025-02-27"
 output:
-  md_document:
-    variant: gfm
   word_document: default
   html_document: 
     toc: true
     toc_float: true
+  md_document:
+    variant: gfm
   pdf_document: default
 ---
 
@@ -18,12 +18,13 @@ library(knitr)
 
 - [Link of manuscript](https://doi.org/10.1094/PDIS-06-21-1253-RE)
 
+- [GitHub flavored .md file](Coding Challenge 4/R-Markdown-Coding-Challenge.md)
 
 ## File Tree
 
 ```{r}
 library("fs")
-fs::dir_tree(path = "Assignments/CodingChallenge4")
+fs::dir_tree(path = "D:/Spring 2025/PLPA7820/Class-Reports/Assignments/Coding Challenge 4")
 ```
 
 
@@ -45,7 +46,7 @@ written only in a high-level language.
 
 ```{r}
 # Load dataset of MycotoxinData
-Mycotoxin_Data <- read.csv("MycotoxinData.csv", na.strings = "na")
+Mycotoxin_Data <- read.csv("D:/Spring 2025/PLPA7820/Class-Reports/MycotoxinData.csv", na.strings = "na")
 ```
 
 ```{r}
