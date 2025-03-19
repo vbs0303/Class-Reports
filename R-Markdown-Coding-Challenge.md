@@ -1,15 +1,17 @@
-- [Link of manuscript](https://doi.org/10.1094/PDIS-06-21-1253-RE)
+``` r
+library(knitr)
+```
 
-- [GitHub flavored .md file](R-Markdown-Coding-Challenge)
+- [Link of manuscript](https://doi.org/10.1094/PDIS-06-21-1253-RE)
 
 ## File Tree
 
 ``` r
 library("fs")
-fs::dir_tree(path = "D:/Spring 2025/PLPA7820/Class-Reports/Assignments/Coding Challnge 4")
+fs::dir_tree(path = "Assignments/CodingChallenge4")
 ```
 
-    ## D:/Spring 2025/PLPA7820/Class-Reports/Assignments/Coding Challnge 4
+    ## Assignments/CodingChallenge4
     ## ├── R Markdown Coding Challenge.Rmd
     ## ├── R-Markdown-Coding-Challenge.docx
     ## ├── R-Markdown-Coding-Challenge.html
@@ -42,7 +44,7 @@ written only in a high-level language.
 
 ``` r
 # Load dataset of MycotoxinData
-Mycotoxin_Data <- read.csv("D:/Spring 2025/PLPA7820/Class-Reports/MycotoxinData.csv", na.strings = "na")
+Mycotoxin_Data <- read.csv("MycotoxinData.csv", na.strings = "na")
 ```
 
 ``` r
@@ -99,7 +101,7 @@ DONplot.pwc
     ## Warning: Removed 8 rows containing missing values or values outside the scale range
     ## (`geom_point()`).
 
-![](R-Markdown-Coding-Challenge_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
+![](R-Markdown-Coding-Challenge_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
 
 ``` r
 X15ADONplot.pwc <- ggplot(Mycotoxin_Data, aes(x = Treatment, y = X15ADON, fill = Cultivar)) +
@@ -131,7 +133,7 @@ X15ADONplot.pwc
     ## Warning: Removed 10 rows containing missing values or values outside the scale range
     ## (`geom_point()`).
 
-![](R-Markdown-Coding-Challenge_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
+![](R-Markdown-Coding-Challenge_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
 
 ``` r
 Seed.massplot.pwc <- ggplot(Mycotoxin_Data, aes(x = Treatment, y = MassperSeed_mg, fill = Cultivar)) +
@@ -161,7 +163,7 @@ Seed.massplot.pwc
     ## Warning: Removed 2 rows containing missing values or values outside the scale range
     ## (`geom_point()`).
 
-![](R-Markdown-Coding-Challenge_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
+![](R-Markdown-Coding-Challenge_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
 
 ``` r
 Combineplot.pwc <- ggarrange(
@@ -216,4 +218,4 @@ Combineplot.pwc <- ggarrange(
 Combineplot.pwc
 ```
 
-![](R-Markdown-Coding-Challenge_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
+![](R-Markdown-Coding-Challenge_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->

@@ -1,0 +1,26 @@
+---
+title: "Homework_DataWrangling"
+author: "Vaibhav B. Shelar"
+date: "2025-03-19"
+output: 
+  html_document:
+    keep_md: yes
+---
+
+## Seemless data wrangling
+
+The tidyverse is a bunch of packages and functions written by the folks that manages Rstudio.
+The tidyverse builds upon base R to allow for easier use of large datasets.
+
+## Install package tidyverse
+
+install.packages("tidyverse")
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+microbiome.fungi <- read.csv("Assignments/Data_Wrangling/Bull_richness.csv")
+```
+

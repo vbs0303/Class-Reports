@@ -1,6 +1,6 @@
 # Read the csv file
 
-TipsR_data <- read.csv("TipsR.csv", na.strings = ".")
+TipsR_data <- read.csv("Example Data/TipsR.csv", na.strings = ".")
 
 # to know the data were read correctly, we can use following strategies
 
