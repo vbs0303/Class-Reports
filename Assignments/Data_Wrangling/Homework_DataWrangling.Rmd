@@ -3,9 +3,10 @@ title: "Homework_DataWrangling"
 author: "Vaibhav B. Shelar"
 date: "2025-03-19"
 output:
-  pdf_document: default
+  word_document: default
   html_document:
     keep_md: true
+  pdf_document: default
 editor_options:
   chunk_output_type: inline
 ---
