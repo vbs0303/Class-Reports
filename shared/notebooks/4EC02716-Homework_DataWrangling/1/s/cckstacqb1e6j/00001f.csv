@@ -1,0 +1,2 @@
+"0",""
+"0","head(left_join(metadata, richness, by = ""SampleID"")) # adding the richness data to the metadata based on the common column of sampleID"

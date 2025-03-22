@@ -2,10 +2,11 @@
 title: "Homework_DataWrangling"
 author: "Vaibhav B. Shelar"
 date: "2025-03-19"
-output: 
-  html_document: 
+output:
+  pdf_document: default
+  html_document:
     keep_md: true
-editor_options: 
+editor_options:
   chunk_output_type: inline
 ---
 

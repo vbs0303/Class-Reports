@@ -1,0 +1,4 @@
+"0","microbiome.fungi2$logRich <- log(microbiome.fungi2$richness)"
+"0",""
+"0","# Create a new column called logRich"
+"0","head(mutate(microbiome.fungi2, logRich = log(richness)))"

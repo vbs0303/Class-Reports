@@ -1,0 +1,3 @@
+"0",""
+"0","# Creating a new column which combines Crop and Treatment"
+"0","head(mutate(microbiome.fungi2, Crop_Treatment = paste(Crop, Treatment)))"

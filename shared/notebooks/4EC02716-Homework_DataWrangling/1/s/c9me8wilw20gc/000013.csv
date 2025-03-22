@@ -1,0 +1,5 @@
+"0","microbiome.fungi %>%"
+"0","  select(SampleID, Crop, Compartment:Fungicide, richness) %>%"
+"0","   group_by(Treatment, Fungicide) %>%  # grouping by treatment and fungicide to later calculate summary stats by group"
+"0","  summarise(Mean = mean(richness))  # Calculate the mean per Treatment and fungicide"
+"2","`summarise()` has grouped output by 'Treatment'. You can override using the `.groups` argument."

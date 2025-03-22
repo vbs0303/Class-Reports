@@ -1,0 +1,12 @@
+"0","microbiome.fungi %>%
+  select(SampleID, Crop, Compartment:Fungicide, richness) %>%
+   group_by(Treatment, Fungicide) %>%  # grouping by treatment and fungicide to later calculate summary stats by group
+  summarise(Mean = mean(richness)) %>%  # Calculate the mean per Treatment and fungicide
+  pivot_wider(names_from = Fungicide, value_from = Mean) # pivot to wide format
+"
+"2","`summarise()` has grouped output by 'Treatment'. You can override using the `.groups` argument."
+"1","[1m[33mError[39m in `pivot_wider()`:[22m
+[33m![39m Can't select columns that don't exist.
+[31m✖[39m Column `value` doesn't exist.
+[90mRun `]8;;x-r-run:rlang::last_trace()rlang::last_trace()]8;;` to see where the error occurred.[39m
+"

@@ -1,0 +1,8 @@
+"0","microbiome.fungi %>%
+  select(SampleID, Crop, Compartment:Fungicide, richness) %>%
+   group_by(Treatment, Fungicide) %>%  # grouping by treatment and fungicide to later calculate summary stats by group
+  summarise(Mean = mean(richness)) %>%  # Calculate the mean per Treatment and fungicide
+  pivot_wider(names_from = Fungicide, values_from = Mean) %>% # pivot to wide format
+  mutate(diff.fungicide = C - F) # calculate the difference between means
+"
+"2","`summarise()` has grouped output by 'Treatment'. You can override using the `.groups` argument."

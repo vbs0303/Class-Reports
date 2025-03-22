@@ -1,0 +1,1 @@
+"0","microbiome.fungi2 <- select(microbiome.fungi, SampleID, Crop, Compartment:Fungicide, richness)"

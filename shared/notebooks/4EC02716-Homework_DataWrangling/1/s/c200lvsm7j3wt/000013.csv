@@ -1,0 +1,5 @@
+"0","microbiome.fungi %>%"
+"0","  select(SampleID, Crop, Compartment:Fungicide, richness) %>%  # selecting columns"
+"0","  filter(Treatment == ""Conv."") %>%  # subsetting to only include the conventional treatments"
+"0","  mutate(logRich = log(richness)) %>%  # creating new column of the log richness"
+"0","  summarise(Mean.rich = mean(logRich))  #Calculating overall mean log richness within the conventionally managed treatments "
