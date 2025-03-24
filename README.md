@@ -9,4 +9,4 @@ The repository created for PLPA 6820 class assignment submission.
 
 Coding challenge 5 file submission. 
 
-- [PDF file](Assignments/CodingChallenge5/CodingChallenge_DataWrangling.docx)
+- [Coding Challenge 5 .docx file](Assignments/CodingChallenge5/CodingChallenge_DataWrangling.docx)
