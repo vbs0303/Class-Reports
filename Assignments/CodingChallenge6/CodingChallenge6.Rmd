@@ -1,0 +1,154 @@
+---
+title: "CodingChallenege6"
+author: "Vaibhav B. Shelar"
+date: "2025-03-27"
+output: 
+      word_document: default
+      variant: gfm
+      md_document:
+      html_document: 
+      toc: true
+      toc_float: true
+      pdf_document: default
+---
+### Q1
+
+# Regarding reproducibility, what is the main point of writing your own functions and iterations? 
+
+# Ans: The main point of writing your own functions and iterations is to make the code more readable, reusable, and reproducible.
+
+### Q2
+
+# In your own words, describe how to write a function and a for loop in R and how they work. Give me specifics like syntax, where to write code, and how the results are returned. 
+
+# Ans: To write a function in R, we use the `function` keyword followed by the function name and its arguments. The body of the function is enclosed in curly braces `{}` and contains the code that performs the desired task.
+
+# Examples
+
+# 1)
+```{r}
+C_to_F <- function(c_temp) {
+  fahrenheit <- (c_temp * 9/5) + 32  # Conversion formula
+  return(fahrenheit)  # Return the result
+}
+
+# Example usage:
+C_to_F(25)  
+```
+
+
+```{r}
+for(i in -25:50){
+  result <- C_to_F(i)
+  print(result)
+}
+```
+
+
+### Q3 
+#Read in the Cities.csv file from Canvas using a relative file path.
+
+```{r}
+# Read in the dataset
+cities <- read.csv("Cities.csv")
+```
+
+### Q4
+
+```{r}
+# Function to calculate the distance between two pairs of coordinates
+haversine_distance <- function(lat1, lon1, lat2, lon2) {
+  rad.lat1 <- lat1 * pi/180  # convert to radians
+  rad.lon1 <- lon1 * pi/180
+  rad.lat2 <- lat2 * pi/180
+  rad.lon2 <- lon2 * pi/180
+  delta_lat <- rad.lat2 - rad.lat1 # Haversine formula
+  delta_lon <- rad.lon2 - rad.lon1
+  a <- sin(delta_lat / 2)^2 + cos(rad.lat1) * cos(rad.lat2) * sin(delta_lon / 2)^2
+  c <- 2 * asin(sqrt(a)) 
+  earth_radius <- 6378137 # Earth's radius in kilometers
+  distance_km <- (earth_radius * c)/1000 # Calculate the distance
+  return(distance_km)
+}
+```
+
+### Q5
+
+# Using your function, compute the distance between Auburn, AL and New York City 
+# a.	Subset/filter the Cities.csv data to include only the latitude and longitude values you need and input as input to your function. 
+
+# a
+
+```{r}
+library(dplyr)
+# Subset the data for Auburn, AL and New York City
+nyc<- cities %>% filter(city == "New York") 
+auburn<- cities %>% filter(city == "Auburn")
+
+# Extracting just latitude and longitude values
+lat1<- nyc$lat
+lon1<- nyc$long
+
+lat2<- auburn$lat
+lon2<- auburn$long
+
+# b 
+
+haversine_distance(lat1, lon1, lat2, lon2)
+
+```
+
+### Q6
+
+# Now, use your function within a for loop to calculate the distance between all other cities in the data
+
+```{r}
+# loops to calculate distance from auburn to each city
+for(i in 1:nrow(cities)){
+  if(cities$city[[1]] != "Auburn"){
+    lat1<- cities$lat[i]
+    lon1<- cities$long[i]
+    
+    dist<- haversine_distance(lat1, lon1, lat2, lon2)
+    print(dist)
+  }
+}
+
+```
+## Bonus point code
+
+```{r}
+# creating a empty data frame to store results
+citydistance_df<- data.frame(city1 = character(),
+                         city2 = character(),
+                         distance_km = numeric())
+# Loop through each city
+for(i in 1:nrow(cities)){
+  if(cities$city[i] != "Auburn"){
+    lat1<- cities$lat[i]
+    lon1<- cities$long[i]
+# calculating the distance
+    dist<- haversine_distance(lat1, lon1, lat2, lon2)
+    
+# Adding results as new row
+    new_row<- data.frame(city1 = cities$city[i],
+                         city2 = "Auburn",
+                         distance_km = dist)
+    
+    citydistance_df<- rbind(citydistance_df, new_row)
+  }
+  
+}
+
+# first six rows of the data frame
+head(citydistance_df)
+```
+
+
+### Q7 Adding a link to my github
+
+(Github_Link)[https://github.com/vbs0303/Class-Reports.git]
+
+
+
+
