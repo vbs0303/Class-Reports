@@ -3,10 +3,10 @@ title: "CodingChallenege6"
 author: "Vaibhav B. Shelar"
 date: "2025-03-27"
 output: 
-      word_document: default
+      html_document: 
       variant: gfm
       md_document:
-      html_document: 
+      word_document: default
       toc: true
       toc_float: true
       pdf_document: default
