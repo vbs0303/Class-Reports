@@ -1,0 +1,152 @@
+---
+title: "Homework_LinearModels"
+author: "Vaibhav B. Shelar"
+date: "2025-04-03"
+output:
+  word_document: null
+  html_document: default
+  md_document:
+    variant: gfm
+  pdf_document: default
+---
+
+```{r}
+library(tidyverse)
+library(lme4)
+library(emmeans)
+library(multcomp)
+```
+
+
+
+```{r}
+data("mtcars")
+```
+
+```{r}
+ggplot(mtcars, aes(x = wt, y = mpg)) +
+  geom_smooth(method = lm, se = FALSE, color = "grey") +
+  geom_point(aes(color = wt)) +
+  xlab("Weight") + 
+  ylab("Miles per gallon") +
+  scale_colour_gradient(low = "forestgreen", high = "black") +
+  theme_classic()
+```
+
+```{r}
+lm1 <- lm(mpg ~ wt, data = mtcars)
+summary(lm1)
+
+anova(lm1)
+cor.test(mtcars$wt, mtcars$mpg)
+```
+
+```{r}
+model <- lm(mpg~wt, data = mtcars)
+
+ggplot(model, aes(y = .resid, x = .fitted)) +
+  geom_point() +
+  geom_hline(yintercept = 0)
+```
+
+```{r}
+bull.rich <- read.csv("Bull_richness.csv")
+
+str(bull.rich)
+head(bull.rich)
+```
+
+```{r}
+library(tidyverse)
+bull.rich.sub <- bull.rich %>%
+  filter(GrowthStage == "V8" & Treatment == "Conv.")
+
+t.test(richness ~ Fungicide, data = bull.rich.sub)
+summary(lm(richness~Fungicide, data = bull.rich.sub))
+anova(lm(richness~Fungicide, data = bull.rich.sub))
+```
+
+```{r}
+bull.rich.sub2 <- bull.rich %>%
+  filter(Fungicide == "C" & Treatment == "Conv." & Crop == "Corn")
+```
+
+```{r}
+bull.rich.sub2$GrowthStage <- factor(bull.rich.sub2$GrowthStage, levels = c("V6", "V8", "V15"))
+
+ggplot(bull.rich.sub2, aes(x = GrowthStage, y = richness)) +
+  geom_boxplot()
+```
+
+```{r}
+lm3 <- lm(richness ~ GrowthStage, data = bull.rich.sub2)
+summary(lm3)
+anova(lm3)
+summary(aov(richness ~ GrowthStage, data = bull.rich.sub2))
+```
+
+```{r}
+library(emmeans)
+library(multcomp)
+library(dplyr)
+sessionInfo()
+```
+
+
+```{r}
+lsmeans <- emmeans(lm3, ~GrowthStage) # estimate lsmeans of variety within siteXyear
+Results_lsmeans <- cld(lsmeans, alpha = 0.05, reversed = TRUE, details = TRUE) # contrast with Tukey ajustment by default. 
+Results_lsmeans
+```
+
+```{r}
+bull.rich.sub3 <- bull.rich %>% 
+  filter(Treatment == "Conv." & Crop == "Corn")
+
+bull.rich.sub3$GrowthStage <- factor(bull.rich.sub3$GrowthStage, levels = c("V6", "V8", "V15"))
+```
+
+```{r}
+lm.inter <- lm(richness ~ GrowthStage*Fungicide, data = bull.rich.sub3)
+
+```
+
+```{r}
+summary(lm.inter) # significant terms
+anova(lm.inter) # The interaction term is signifant. 
+```
+
+```{r}
+lsmeans <- emmeans(lm.inter, ~Fungicide|GrowthStage) # estimate lsmeans of variety within siteXyear
+Results_lsmeans <- cld(lsmeans, alpha = 0.05, reversed = TRUE, details = TRUE) # contrast with Tukey ajustment
+Results_lsmeans
+```
+
+```{r}
+library(ggplot2)
+
+bull.rich.sub3 %>%
+  ggplot(aes(x = GrowthStage, y = richness, color = Fungicide)) +
+  geom_boxplot()
+```
+
+# Mixed effects models
+
+```{r}
+library(lme4)
+
+```
+
+```{r}
+lm.inter2 <- lmer(richness ~ GrowthStage*Fungicide + (1|Rep), data = bull.rich.sub3)
+summary(lm.inter2) # significant terms
+summary(lm.inter)
+
+lsmeans <- emmeans(lm.inter2, ~Fungicide|GrowthStage) # estimate lsmeans of variety within siteXyear
+Results_lsmeans <- cld(lsmeans, alpha = 0.05, details = TRUE) # contrast with Tukey ajustment
+Results_lsmeans
+```
+
+
+
+
