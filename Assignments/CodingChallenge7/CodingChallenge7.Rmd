@@ -1,0 +1,153 @@
+---
+title: "CodingChallenge7"
+author: "Vaibhav B. Shelar"
+date: "2025-04-03"
+output: 
+      word_document: 
+      toc: true
+      toc_float: true
+      html_document:
+      md_document: 
+        variant: gfm
+      pdf_document:
+---
+
+# Q1
+
+### Read in the data called “PlantEmergence.csv” using a relative file path and load the following libraries. tidyverse, lme4, emmeans, multcomp, and multcompView. Turn the Treatment , DaysAfterPlanting  and Rep into factors using the function as.factor
+STAND$Treatment <- as.factor(STAND$Treatment) # example shown here. 
+
+```{r}
+## load the libraries
+
+library(tidyverse)
+library(lme4)
+library(emmeans)
+library(multcomp)
+library(multcompView)
+```
+
+```{r}
+## read in the data
+STAND <- read.csv("PlantEmergence.csv")
+
+STAND$Treatment <- as.factor(STAND$Treatment)
+STAND$DaysAfterPlanting <- as.factor(STAND$DaysAfterPlanting)
+STAND$Rep <- as.factor(STAND$Rep)
+```
+
+# Q2
+
+
+```{r}
+## Fit a linear model to predict Emergence using Treatment and DaysAfterPlanting along with the interaction
+
+lm1 <- lm(Emergence ~ Treatment * DaysAfterPlanting, data = STAND)
+
+summary(lm1) 
+anova(lm1)
+```
+
+# Q3
+
+# Based on the results of the linear model in question 2, do you need to fit the interaction term? 
+
+### The interaction effect of the Treatment and DaysAfterPlanting is not significant (p>0.05), Therefore, there is no need to fit the interaction term in the linear model.
+
+```{r}
+## simplified linear model without the interaction term
+
+lm2 <- lm(Emergence ~ Treatment + DaysAfterPlanting, data = STAND)
+summary(lm2)
+anova(lm2)
+```
+
+### Interpret the results 
+The intercept in this linear model is estimated to be 182.163, which is the expected emergence when Treatment is at the reference level (Treatment 1). The coefficient of the Treatment 2 is estimated to be -134.531 which is statistically significant as compared to Treatment 1 and indicates 134 unit lower plant emergence in Treatment 2. 
+
+
+# Q4
+
+
+```{r}
+# Calculate the least square means for Treatment
+lsmeans_treatment <- emmeans(lm2, ~ Treatment)
+
+# Perform Tukey separation with compact letter display
+results_lsmeans <- cld(lsmeans_treatment, alpha = 0.05, Letters = letters)
+
+# View the results
+results_lsmeans
+```
+## Result Interpretation
+In this experiment, the Treatment 2 has a significantly lower emergence as compared to all other treatments. Moreover, the Treatments 7, 1, 9, 4, 8 are not statistically different from each other. The Treatments 6, 3, and 5 showed the highest emergence as comapred to other treatments but they are not significantly different from each other. 
+
+
+# Q5 
+## Create a bar plot with letters denoting treatment differences
+
+```{r}
+plot_cldbars_onefactor <- function(lm_model, factor) {
+  data <- lm_model$model
+  variables <- colnames(lm_model$model)
+  dependent_var <- variables[1]
+  independent_var <- variables[2:length(variables)]
+
+  lsmeans <- emmeans(lm_model, as.formula(paste("~", factor))) # estimate lsmeans 
+  Results_lsmeans <- cld(lsmeans, alpha = 0.05, reversed = TRUE, details = TRUE, Letters = letters) # contrast with Tukey adjustment by default.
+  
+  # Extracting the letters for the bars
+  sig.diff.letters <- data.frame(Results_lsmeans$emmeans[,1], 
+                                 str_trim(Results_lsmeans$emmeans[,7]))
+  colnames(sig.diff.letters) <- c(factor, "Letters")
+  
+  # for plotting with letters from significance test
+  ave_stand2 <- lm_model$model %>%
+    group_by(!!sym(factor)) %>%
+    dplyr::summarize(
+      ave.emerge = mean(.data[[dependent_var]], na.rm = TRUE),
+      se = sd(.data[[dependent_var]]) / sqrt(n())
+    ) %>%
+    left_join(sig.diff.letters, by = factor) %>%
+    mutate(letter_position = ave.emerge + 10 * se)
+  
+  plot <- ggplot(data, aes(x = !! sym(factor), y = !! sym(dependent_var))) + 
+    stat_summary(fun = mean, geom = "bar") +
+    stat_summary(fun.data = mean_se, geom = "errorbar", width = 0.5) +
+    ylab("Number of emerged plants") + 
+    geom_jitter(width = 0.02, alpha = 0.5) +
+    geom_text(data = ave_stand2, aes(label = Letters, y = letter_position), size = 5) +
+    xlab(as.character(factor)) +
+    theme_classic()
+  
+  return(plot)
+}
+
+## plots a bar chart with letters denoting treatment differences
+plot_cldbars_onefactor(lm2, "Treatment")
+
+```
+
+## Results Interpreation
+
+The letters above the bars in the plot indicate the results of the Tukey separation test. Treatments that share a common letter are not significantly different from each other, while treatments with different letters are significantly different.And the treatments having both the letters (ab) are not statistically different from the treatment with letter a and treatment with letter b as well. 
+In this experiment, the treatment 2 is statistically significant and having lower emergence as compared to all other treaments. The treatments 3, 4, 5, and 6 results in higher emergence, and they are not statistically significant from each other. The treatments 1, 7, 8, and 9 are not having statistically different number of emerged plants.  
+
+
+# Q6 Adding a link to my github
+
+[Github_Link](https://github.com/vbs0303/Class-Reports.git)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
